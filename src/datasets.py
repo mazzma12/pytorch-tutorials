@@ -1,6 +1,6 @@
 from zipfile import ZipFile
 from io import BytesIO
-import urllib
+from urllib.request import urlopen
 
 
 DATASET_FOLDER = '../data/'
@@ -13,7 +13,7 @@ def fetch_dataset(name='faces'):
 
     url = DATASET_URL_MAPPING[name]
 
-    resp = urllib.request.urlopen(url)
+    resp = urlopen(url)
 
     with ZipFile(BytesIO(resp.read())) as my_zip_file:
         my_zip_file.extractall(DATASET_FOLDER)
